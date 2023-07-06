@@ -10,6 +10,15 @@ import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import JobDetails from './pages/JobDetails';
+import NotFound from './pages/NotFound';
+
+import DashboardLayout from './component/DashboardLayout';
+
+import AdminRoute from './pages/Admin/AdminRoute';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+
+// Custom HOC
+const AdminDashboardHOC = DashboardLayout(AdminDashboard);
 
 function App() {
   return (
@@ -26,7 +35,23 @@ function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path="/job/:id" element={<JobDetails />} />
+              <Route path='/admin/dashboard' element={
+                <AdminRoute>
+                  <AdminDashboardHOC />
+                </AdminRoute>
+              } />
+              <Route path='/admin/users' element={
+                <AdminRoute>
+                  {/* Userss */}
+                </AdminRoute>
+              } />
+              <Route path='/admin/jobs' element={
+                <AdminRoute>
+                  {/* Jobss */}
+                </AdminRoute>
+              } />
 
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </ProSidebarProvider>
