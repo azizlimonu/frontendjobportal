@@ -1,13 +1,16 @@
-// routes / api / job /
-// .post('/create'
-//   .get('/:id'
-//     .put('/update/:job_id'
-//       .get('/show'
-
 export const loadJobReducer = (state = { jobs: [] }, action) => {
   switch (action.type) {
     case 'JOB_LOAD_REQUEST':
-      return { loading: true, error: null }
+      return { 
+        loading: true, 
+        error: null,
+        success: "",
+        page: 0,
+        pages: 0,
+        count: 0,
+        setUniqueLocation: [],
+        jobs: []
+       }
 
     case "JOB_LOAD_FAIL":
       return {

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import WorkIcon from '@mui/icons-material/Work';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const pages = ["Home, login"];
+const pages = ["Home", "Login", "Register"];
 
 const Navbar = () => {
   const { userInfo } = useSelector((state) => state.signIn);
@@ -81,7 +81,7 @@ const Navbar = () => {
               <MenuIcon />
             </IconButton>
 
-
+            {/* toggle bar show menu */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -150,6 +150,36 @@ const Navbar = () => {
               </Link>
             </Button>
 
+            {!userInfo && (
+              <>
+                <Button
+                  onClick={handleCloseNav}
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                  <Link
+                    to="/register"
+                    style={{
+                      color: 'white', textDecoration: "none"
+                    }}
+                  >
+                    Register
+                  </Link>
+                </Button>
+
+                <Button
+                  onClick={handleCloseNav}
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                  <Link
+                    to="/login"
+                    style={{
+                      color: 'white', textDecoration: "none"
+                    }}
+                  >
+                    Login
+                  </Link>
+                </Button>
+              </>
+            )}
+
           </Box>
 
           {/* Toggle Profile */}
@@ -209,19 +239,35 @@ const Navbar = () => {
 
               {
                 !userInfo ? (
-                  <MenuItem onClick={handleCloseUser}>
-                    <Typography textAlign="center">
-                      <Link
-                        style={{
-                          textDecoration: "none",
-                          color: palette.primary.main
-                        }}
-                        to="/login"
-                      >
-                        Log In
-                      </Link>
-                    </Typography>
-                  </MenuItem>
+                  <>
+                    <MenuItem onClick={handleCloseUser}>
+                      <Typography textAlign="center">
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: palette.primary.main
+                          }}
+                          to="/login"
+                        >
+                          Log In
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleCloseUser}>
+                      <Typography textAlign="center">
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: palette.primary.main
+                          }}
+                          to="/register"
+                        >
+                          Register
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  </>
                 ) : (
                   <MenuItem onClick={handleLogout}>
                     <Typography
