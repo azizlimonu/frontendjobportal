@@ -6,7 +6,8 @@ import {
   userReducerApplyJob,
   userReducerLogout,
   userReducerProfile,
-  userReducerSignIn
+  userReducerSignIn,
+  userReducerSignUp
 } from "./reducer/userReducer";
 import {
   createJobReducer,
@@ -24,6 +25,7 @@ import {
 const reducer = combineReducers({
   // user reducer
   signIn: userReducerSignIn,
+  signUp: userReducerSignUp,
   logOut: userReducerLogout,
   userProfile: userReducerProfile,
   userJobApplication: userReducerApplyJob,

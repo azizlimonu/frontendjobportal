@@ -21,6 +21,25 @@ export const userSignInAction = (user) => async (dispatch) => {
   }
 };
 
+// SignUn Action
+export const userSignUpAction = (user) => async (dispatch) => {
+  dispatch({ type: "USER_SIGNUP_REQUEST" });
+  try {
+    const { data } = await axios.post("/api/auth/signup", user);
+    dispatch({
+      type: "USER_SIGNUP_SUCCESS",
+      payload: data
+    });
+    toast.success("SignUp Successfully");
+  } catch (error) {
+    dispatch({
+      type: "USER_SIGNUP_FAIL",
+      payload: error.response.data.error
+    });
+    toast.error("Something Wrong With The Server");
+  }
+};
+
 // Logout Action
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: "USER_LOGOUT_REQUEST" });
@@ -85,7 +104,7 @@ export const userGetAllAction = () => async (dispatch) => {
 export const userApplyJobAction = (job) => async (dispatch) => {
   dispatch({ type: "USER_APPLY_REQUEST" });
   try {
-    const { data } = await axios.get("/api/user/jobhistory",job);
+    const { data } = await axios.post("/api/user/jobhistory",job);
     dispatch({
       type: "USER_APPLY_SUCCESS",
       payload: data

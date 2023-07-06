@@ -27,6 +27,34 @@ export const userReducerSignIn = (state = {}, action) => {
   }
 };
 
+export const userReducerSignUp = (state = {}, action) => {
+  switch (action.type) {
+    case "USER_SIGNUP_REQUEST":
+      return { loading: true, userInfo: null, isAuthenticated: false }
+
+    case "USER_SIGNUP_FAIL":
+      return {
+        loading: false,
+        userInfo: null,
+        isAuthenticated: false,
+        error: action.payload
+      }
+
+    case "USER_SIGNUP_RESET":
+      return {}
+
+    case "USER_SIGNUP_SUCCESS":
+      return {
+        loading: false,
+        userInfo: action.payload,
+        isAuthenticated: false
+      }
+
+    default:
+      return state;
+  }
+};
+
 // Handle User Profile
 export const userReducerProfile = (state = { user: null }, action) => {
   switch (action.type) {
