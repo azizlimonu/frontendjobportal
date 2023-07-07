@@ -99,21 +99,22 @@ export const userReducerLogout = (state = {}, action) => {
 export const userReducerApplyJob = (state = {}, action) => {
   switch (action.type) {
     case "USER_APPLY_REQUEST":
-      return { loading: true, userJob: null, error: null }
+      return { loading: true, jobId: null, error: null };
 
     case "USER_APPLY_FAIL":
-      return { loading: false, userJob: null, error: action.payload }
+      return { loading: false, jobId: null, error: action.payload };
 
     case "USER_APPLY_RESET":
-      return {}
+      return {};
 
     case "USER_APPLY_SUCCESS":
-      return { loading: false, userJob: action.payload, error: null }
+      return { loading: false, jobId: action.payload, error: null };
 
     default:
       return state;
   }
 };
+
 
 //Get All User reducer
 export const getAllUserReducer = (state = {users:[]}, action) => {

@@ -23,8 +23,14 @@ const UserDashboard = () => {
         spacing={{ xs: 1, sm: 2, md: 4 }}
       >
         <StatComponent
-          value={user && moment(user.createdAt).format('YYYY / MM / DD')}
-          icon={<CalendarMonthIcon sx={{ color: "#fafafa", fontSize: 30 }} />}
+          value={
+            user && moment(user.createdAt).format('YYYY / MM / DD')
+          }
+          icon={
+            <CalendarMonthIcon
+              sx={{ color: "#fafafa", fontSize: 30 }}
+            />
+          }
           description="Member since"
           money=''
         />

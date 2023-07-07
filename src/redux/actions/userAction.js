@@ -89,7 +89,7 @@ export const userGetAllAction = () => async (dispatch) => {
       type: "GET_ALLUSERS_SUCCESS",
       payload: data.users
     });
-    toast.success("All Users Loaded");
+    // toast.success("All Users Loaded");
   } catch (error) {
     console.log(error);
     dispatch({
@@ -101,10 +101,10 @@ export const userGetAllAction = () => async (dispatch) => {
 };
 
 // ApplyJob Action
-export const userApplyJobAction = (job) => async (dispatch) => {
+export const userApplyJobAction = (jobId) => async (dispatch) => {
   dispatch({ type: "USER_APPLY_REQUEST" });
   try {
-    const { data } = await axios.post("/api/user/jobhistory",job);
+    const { data } = await axios.post("/api/user/jobhistory", jobId );
     dispatch({
       type: "USER_APPLY_SUCCESS",
       payload: data

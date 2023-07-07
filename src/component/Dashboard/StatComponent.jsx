@@ -26,6 +26,16 @@ const StatComponent = ({ value, icon, description, money }) => {
         </IconButton>
 
         <Typography
+          variant="body2"
+          sx={{
+            color: "white",
+            mb: 0
+          }}
+        >
+          {description}
+        </Typography>
+        
+        <Typography
           variant='h4'
           sx={{
             color: "#fafafa",
@@ -34,16 +44,6 @@ const StatComponent = ({ value, icon, description, money }) => {
           }}
         >
           {money !== '' ? money + value : value}
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{
-            color: palette.primary.main,
-            mb: 0
-          }}
-        >
-          {description}
         </Typography>
       </CardContent>
     </Card>

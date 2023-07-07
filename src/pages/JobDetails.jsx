@@ -11,6 +11,7 @@ import { userApplyJobAction } from '../redux/actions/userAction'
 const JobDetails = () => {
   const dispatch = useDispatch();
   const { singleJob, loading } = useSelector(state => state.getSingleJob)
+  const { jobId } = useSelector(state => state.userJobApplication);
   const { id } = useParams();
   console.log(singleJob);
   useEffect(() => {
@@ -19,14 +20,13 @@ const JobDetails = () => {
   }, [id]);
 
   const handleApplyJob = () => {
-    dispatch(userApplyJobAction({
-      title: singleJob && singleJob.title,
-      description: singleJob && singleJob.description,
-      salary: singleJob && singleJob.salary,
-      location: singleJob && singleJob.location,
-      jobId: singleJob && singleJob._id
-    }));
+    const jobData = {
+      jobId: singleJob._id.toString(), 
+      applicationStatus: 'applied' 
+    };
+    dispatch(userApplyJobAction(jobData));
   };
+
 
   return (
     <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh" }}>
@@ -108,7 +108,7 @@ const JobDetails = () => {
                     sx={{ fontSize: "13px" }}
                     variant='contained'
                   >
-                    Applied for this Job
+                    {jobId ? "Applied" : "Apply for this Job"}
                   </Button>
                 </Card>
               </Box>

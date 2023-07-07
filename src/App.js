@@ -99,21 +99,21 @@ function App() {
               />
               {/*END ADMIN DASHBOARD */}
               {/* USER DASHBOARD */}
-              <Route path='/users/dashboard'
+              <Route path='/user/dashboard'
                 element={
                   <UserRoute>
                     <UserDashboardPage />
                   </UserRoute>
                 }
               />
-              <Route path='/users/jobs'
+              <Route path='/user/jobs'
                 element={
                   <UserRoute>
                     <UserDashboardJobs />
                   </UserRoute>
                 }
               />
-              <Route path='/users/info'
+              <Route path='/user/info'
                 element={
                   <UserRoute>
                     <UserDashboardInfo />

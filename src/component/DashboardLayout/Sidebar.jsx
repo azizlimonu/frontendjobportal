@@ -28,6 +28,8 @@ const SidebarDashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log("userInfo", userInfo);
+
   //log out 
   const logOut = () => {
     dispatch(userLogoutAction());
@@ -159,6 +161,13 @@ const SidebarDashboard = () => {
                     >
                       Personal Info
                     </MenuItem>
+
+                      <MenuItem
+                        component={<Link to="/" />}
+                        icon={<HomeIcon />}
+                      >
+                        HomePage
+                      </MenuItem>
                   </>
                 )
               }
