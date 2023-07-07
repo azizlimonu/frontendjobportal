@@ -69,7 +69,7 @@ export const userProfileAction = () => async (dispatch) => {
       type: "USER_LOAD_SUCCESS",
       payload: data
     });
-    toast.success("Profile Loaded");
+    // toast.success("Profile Loaded");
   } catch (error) {
     console.log(error);
     dispatch({
@@ -87,7 +87,7 @@ export const userGetAllAction = () => async (dispatch) => {
     const { data } = await axios.get("/api/user/allusers");
     dispatch({
       type: "GET_ALLUSERS_SUCCESS",
-      payload: data
+      payload: data.users
     });
     toast.success("All Users Loaded");
   } catch (error) {

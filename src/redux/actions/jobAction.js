@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // get all the job with pagination
 export const jobLoadAction = (
@@ -48,3 +49,20 @@ export const jobLoadSingleAction = (id) => async (dispatch) => {
 // update job
 
 // delete job
+export const deleteJobAction = (id) => async (dispatch) => {
+  dispatch({ type: "DELETE_JOB_REQUEST" });
+  try {
+    await axios.delete(`/api/job/${id}`);
+    dispatch({
+      type: "DELETE_JOB_SUCCESS",
+      payload: id
+    });
+    toast.success("Job deleted successfully");
+  } catch (error) {
+    dispatch({
+      type: "DELETE_JOB_FAIL",
+      payload: error.response.data.error
+    });
+    toast.error("Failed to delete job");
+  }
+};

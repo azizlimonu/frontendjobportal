@@ -16,9 +16,19 @@ import DashboardLayout from './component/DashboardLayout';
 
 import AdminRoute from './pages/Admin/AdminRoute';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminJobs from './pages/Admin/AdminJobs';
+import CreateJob from './pages/Admin/jobs/CreateJob';
+import EditJob from './pages/Admin/jobs/EditJob';
+import AdminUsers from './pages/Admin/AdminUsers';
 
 // Custom HOC
-const AdminDashboardHOC = DashboardLayout(AdminDashboard);
+const AdminDashboardPage = DashboardLayout(AdminDashboard);
+
+const AdminJobsDashboard = DashboardLayout(AdminJobs);
+const AdminCreateJobDashboard = DashboardLayout(CreateJob);
+const AdminEditJobDashboard = DashboardLayout(EditJob);
+
+const AdminUsersDashboard = DashboardLayout(AdminUsers);
 
 function App() {
   return (
@@ -35,21 +45,43 @@ function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path="/job/:id" element={<JobDetails />} />
-              <Route path='/admin/dashboard' element={
-                <AdminRoute>
-                  <AdminDashboardHOC />
-                </AdminRoute>
-              } />
-              <Route path='/admin/users' element={
-                <AdminRoute>
-                  {/* Userss */}
-                </AdminRoute>
-              } />
-              <Route path='/admin/jobs' element={
-                <AdminRoute>
-                  {/* Jobss */}
-                </AdminRoute>
-              } />
+              <Route path='/admin/dashboard'
+                element={
+                  <AdminRoute>
+                    <AdminDashboardPage />
+                  </AdminRoute>
+                }
+              />
+              <Route path='/admin/users'
+                element={
+                  <AdminRoute>
+                    <AdminUsersDashboard />
+                  </AdminRoute>
+                }
+              />
+              <Route path='/admin/jobs'
+                element={
+                  <AdminRoute>
+                    <AdminJobsDashboard />
+                  </AdminRoute>
+                }
+              />
+              <Route path='/admin/jobs/:id/edit'
+                element={
+                  <AdminRoute>
+                    {/* added soon */}
+                    <AdminEditJobDashboard />
+                  </AdminRoute>
+                }
+              />
+              <Route path='/admin/jobs/create'
+                element={
+                  <AdminRoute>
+                    {/* added soon */}
+                    <AdminCreateJobDashboard />
+                  </AdminRoute>
+                }
+              />
 
               <Route path='*' element={<NotFound />} />
             </Routes>

@@ -91,7 +91,6 @@ export const deleteJobReducer = (state = {}, action) => {
     case "DELETE_JOB_SUCCESS":
       return {
         loading: false,
-        success: action.payload.success,
         payload: action.payload,
       }
 

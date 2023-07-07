@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import WorkIcon from '@mui/icons-material/Work';
 import MenuIcon from '@mui/icons-material/Menu';
+import { userLogoutAction } from '../../redux/actions/userAction';
+import { toast } from 'react-toastify';
 
 const pages = ["Home", "Login", "Register"];
 
@@ -33,13 +35,19 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch()
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate("/");
-    }, 500)
+    dispatch(userLogoutAction())
+      .then(() => {
+        window.location.reload(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 500);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message);
+      });
   };
-  console.log(userInfo);
+
   return (
     <AppBar position="static">
       <Container>
@@ -102,7 +110,9 @@ const Navbar = () => {
             >
               {pages.map((page, idx) => (
                 <MenuItem key={idx} onClick={handleCloseNav}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -222,21 +232,6 @@ const Navbar = () => {
                 </MenuItem>
               )}
 
-
-              <MenuItem onClick={handleCloseUser}>
-                <Typography textAlign="center">
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: palette.primary.main
-                    }}
-                    to="/user/dashboard"
-                  >
-                    User Dashboard
-                  </Link>
-                </Typography>
-              </MenuItem>
-
               {
                 !userInfo ? (
                   <>
@@ -269,17 +264,33 @@ const Navbar = () => {
                     </MenuItem>
                   </>
                 ) : (
-                  <MenuItem onClick={handleLogout}>
-                    <Typography
-                      style={{
-                        textDecoration: "none",
-                        color: palette.primary.main
-                      }}
-                      textAlign="center"
-                    >
-                      Log Out
-                    </Typography>
-                  </MenuItem>
+                  <>
+                    <MenuItem onClick={handleLogout}>
+                      <Typography
+                        style={{
+                          textDecoration: "none",
+                          color: palette.primary.main
+                        }}
+                        textAlign="center"
+                      >
+                        Log Out
+                      </Typography>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleCloseUser}>
+                      <Typography textAlign="center">
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: palette.primary.main
+                          }}
+                          to="/user/dashboard"
+                        >
+                          User Dashboard
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  </>
                 )
               }
             </Menu>

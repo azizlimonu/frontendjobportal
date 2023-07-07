@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogoutAction, userProfileAction } from '../../redux/actions/userAction';
 import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
-
+import HomeIcon from '@mui/icons-material/Home';
 
 const SidebarDashboard = () => {
   const { userInfo } = useSelector(state => state.signIn);
@@ -31,10 +31,7 @@ const SidebarDashboard = () => {
   //log out 
   const logOut = () => {
     dispatch(userLogoutAction());
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate('/');
-    }, 500)
+    navigate("/login");
   }
 
   return (
@@ -131,6 +128,13 @@ const SidebarDashboard = () => {
                       icon={<CategoryIcon />}
                     >
                       Category
+                    </MenuItem>
+
+                    <MenuItem
+                      component={<Link to="/" />}
+                      icon={<HomeIcon />}
+                    >
+                      HomePage
                     </MenuItem>
                   </>
                 ) : (

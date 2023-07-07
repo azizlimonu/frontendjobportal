@@ -88,7 +88,7 @@ export const userReducerLogout = (state = {}, action) => {
       return {}
 
     case "USER_LOGOUT_SUCCESS":
-      return { loading: false, user: action.payload, error: null }
+      return { loading: false, user: null, error: null }
 
     default:
       return state;
