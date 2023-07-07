@@ -45,6 +45,27 @@ export const jobLoadSingleAction = (id) => async (dispatch) => {
 };
 
 // create job
+export const createJobAction = (job) => async (dispatch) => {
+  dispatch({ type: "CREATE_JOB_REQUEST" })
+
+  try {
+    const { data } = await axios.post("/api/job/create", job)
+    dispatch({
+      type: "CREATE_JOB_SUCCESS",
+      payload: data
+    })
+    toast.success("Job created successfully");
+
+
+  } catch (error) {
+    dispatch({
+      type: "CREATE_JOB_FAIL",
+      payload: error.response.data.error
+    })
+    toast.error(error.response.data.error);
+
+  }
+}
 
 // update job
 
