@@ -42,46 +42,33 @@ const JobDetails = () => {
   }
 
   const handleApplyJob = () => {
-    if (user) {
-      if (user.role === 1) {
-        // Manager cannot apply
-        toast.error("Manager Cannot Apply");
-        return;
-      } else if (user.role === 0) {
-        // if the user role was a jobseeker
-        if (user.jobsHistory.length > 0) {
-          // check if the user have applied some job we check to prevent dupplicate entries
-          const idJobString = id.toString();
-          if (user.jobsHistory.some(item => item.job._id.toString() === idJobString)) {
-            toast.error("U have been applied");
-            return;
-          } else {
-            // else if theres no match then we applied
-            const jobData = {
-              jobId: singleJob._id.toString(),
-              applicationStatus: 'applied'
-            };
-            dispatch(userApplyJobAction(jobData));
-            // toast.success("THERES NO MATCH JOBHISTORY ID WITH THE JOBID");
-            return;
-          }
-        } else {
-          // if its a new user that not applied of any job at all
-          const jobData = {
-            jobId: singleJob._id.toString(),
-            applicationStatus: 'applied'
-          };
-          // toast.success("user jobHistory = 0");
-          dispatch(userApplyJobAction(jobData));
-          return;
-        }
-      }
-    } else {
-      // User is not logged in, handle accordingly (e.g., show login prompt)
+    if (!user) {
+      // User is not logged in
       toast.error("Please Log In First");
       return;
     }
+
+    if (user.role === 1) {
+      // Manager cannot apply
+      toast.error("Manager Cannot Apply");
+      return;
+    }
+
+    const idJobString = id.toString();
+    if (user.jobsHistory.length > 0 && user.jobsHistory.some(item => item.job._id.toString() === idJobString)) {
+      // User has already applied for this job
+      toast.error("You have already applied for this job");
+      return;
+    }
+
+    // Apply for the job
+    const jobData = {
+      jobId: singleJob._id.toString(),
+      applicationStatus: 'applied'
+    };
+    dispatch(userApplyJobAction(jobData));
   };
+
 
 
   return (
