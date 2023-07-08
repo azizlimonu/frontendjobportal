@@ -68,6 +68,23 @@ export const createJobAction = (job) => async (dispatch) => {
 }
 
 // update job
+export const updateJobAction = (job_id, jobData) => async (dispatch) => {
+  dispatch({ type: "UPDATE_JOB_REQUEST" });
+  try {
+    const { data } = await axios.put(`/api/job/update/${job_id}`, jobData);
+    dispatch({
+      type: "UPDATE_JOB_SUCCESS",
+      payload: data.job
+    });
+    toast.success("Job deleted successfully");
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_JOB_FAIL",
+      payload: error.response.data.error
+    });
+    toast.error("Failed to update job");
+  }
+};
 
 // delete job
 export const deleteJobAction = (id) => async (dispatch) => {
@@ -85,5 +102,43 @@ export const deleteJobAction = (id) => async (dispatch) => {
       payload: error.response.data.error
     });
     toast.error("Failed to delete job");
+  }
+};
+
+// Find Applicant
+export const findApplicantAction = (job_id) => async (dispatch) => {
+  dispatch({ type: "FIND_APPLICANT_REQUEST" });
+  try {
+    const { data } = await axios.get(`/api/job/applicant/${job_id}`);
+    dispatch({
+      type: "FIND_APPLICANT_SUCCESS",
+      payload: data.applicants
+    });
+    // toast.success("Job deleted successfully");
+  } catch (error) {
+    dispatch({
+      type: "FIND_APPLICANT_FAIL",
+      payload: error.response.data.error
+    });
+    toast.error("Failed to fetch applicant");
+  }
+};
+
+// update status applicant
+export const updateApplicantAction = (applicant_data) => async (dispatch) => {
+  dispatch({ type: "UPDATE_APPLICANT_REQUEST" });
+  try {
+    const { data } = await axios.put(`/api/job/applicant/status`,applicant_data);
+    dispatch({
+      type: "UPDATE_APPLICANT_SUCCESS",
+      payload: data
+    });
+    toast.success("Update Applicant successfully");
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_APPLICANT_FAIL",
+      payload: error.response.data.error
+    });
+    toast.error("Failed to update applicant");
   }
 };

@@ -33,7 +33,10 @@ const SidebarDashboard = () => {
   //log out 
   const logOut = () => {
     dispatch(userLogoutAction());
-    navigate("/login");
+    window.location.reload(true);
+    setTimeout(() => {
+      navigate('/login');
+    }, 500)
   }
 
   return (

@@ -12,8 +12,11 @@ import {
 import {
   createJobReducer,
   deleteJobReducer,
+  findApplicantReducer,
   loadJobReducer,
-  loadSingleJobReducer
+  loadSingleJobReducer,
+  updateApplicantReducer,
+  updateJobReducer
 } from "./reducer/jobReducer";
 import {
   createJobTypeReducer,
@@ -35,11 +38,15 @@ const reducer = combineReducers({
   getSingleJob: loadSingleJobReducer,
   createSingleJob: createJobReducer,
   deleteSingleJob: deleteJobReducer,
+  updateJob: updateJobReducer,
   // job type reducer
   getAllJobType: loadJobTypeReducer,
   createJobType: createJobTypeReducer,
   updateJobType: updateJobTypeReducer,
   deleteJobType: deleteJobTypeReducer,
+  // applicant reducer
+  findApplicant: findApplicantReducer,
+  updateApplicant: updateApplicantReducer,
 });
 
 let initialState = {

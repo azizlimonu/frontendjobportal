@@ -1,8 +1,8 @@
 export const loadJobReducer = (state = { jobs: [] }, action) => {
   switch (action.type) {
     case 'JOB_LOAD_REQUEST':
-      return { 
-        loading: true, 
+      return {
+        loading: true,
         error: null,
         success: "",
         page: 0,
@@ -10,7 +10,7 @@ export const loadJobReducer = (state = { jobs: [] }, action) => {
         count: 0,
         setUniqueLocation: [],
         jobs: []
-       }
+      }
 
     case "JOB_LOAD_FAIL":
       return {
@@ -105,3 +105,71 @@ export const deleteJobReducer = (state = {}, action) => {
   }
 };
 
+export const updateJobReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "UPDATE_JOB_REQUEST":
+      return { loading: true, error: null }
+
+    case "UPDATE_JOB_SUCCESS":
+      return {
+        loading: false,
+        error: null,
+        payload: action.payload,
+      }
+
+    case "UPDATE_JOB_FAIL":
+      return { loading: false, error: action.payload }
+
+    case "UPDATE_JOB_RESET":
+      return {}
+
+    default:
+      return state;
+  }
+};
+
+export const findApplicantReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FIND_APPLICANT_REQUEST":
+      return { loading: true, error: null }
+
+    case "FIND_APPLICANT_SUCCESS":
+      return {
+        loading: false,
+        error: null,
+        applicants: action.payload,
+      }
+
+    case "FIND_APPLICANT_FAIL":
+      return { loading: false, error: action.payload }
+
+    case "FIND_APPLICANT_RESET":
+      return {}
+
+    default:
+      return state;
+  }
+};
+
+export const updateApplicantReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "UPDATE_APPLICANT_REQUEST":
+      return { loading: true, error: null }
+
+    case "UPDATE_APPLICANT_SUCCESS":
+      return {
+        loading: false,
+        error: null,
+        payload: action.payload,
+      }
+
+    case "UPDATE_APPLICANT_FAIL":
+      return { loading: false, error: action.payload }
+
+    case "UPDATE_APPLICANT_RESET":
+      return {}
+
+    default:
+      return state;
+  }
+};

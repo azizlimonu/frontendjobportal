@@ -5,11 +5,12 @@ import LoadingBox from '../../component/LoadinBox';
 import { Box, Button, Paper, Typography, gridClasses } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AdminJobs = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(jobLoadAction());
@@ -23,7 +24,7 @@ const AdminJobs = () => {
   const deleteJobById = (id) => {
     dispatch(deleteJobAction(id))
       .then(() => {
-        dispatch(jobLoadAction()); 
+        dispatch(jobLoadAction());
       })
       .catch((error) => {
         console.log(error);
@@ -50,12 +51,6 @@ const AdminJobs = () => {
       valueGetter: (data) => data.row.jobType.jobTypeName
     },
     {
-      field: 'user',
-      headerName: 'User',
-      width: 150,
-      valueGetter: (data) => data.row.user.firstName
-    },
-    {
       field: 'available',
       headerName: 'available',
       width: 150,
@@ -74,13 +69,13 @@ const AdminJobs = () => {
     },
     {
       field: "Actions",
-      width: 200,
+      width: 300,
       renderCell: (values) => (
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            width: "170px"
+            width: "100%"
           }}
         >
           <Button
@@ -97,12 +92,19 @@ const AdminJobs = () => {
             </Link>
           </ Button>
 
-          < Button
+          <Button
             onClick={(e) => deleteJobById(values.row._id)}
             variant="contained"
             color="error"
           >
             Delete
+          </ Button>
+
+          <Button
+            onClick={() => navigate(`/admin/jobs/applicant/${values.row._id}`)}
+            variant="contained"
+          >
+            Details
           </ Button>
         </Box>
       )

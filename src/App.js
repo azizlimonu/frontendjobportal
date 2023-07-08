@@ -25,6 +25,7 @@ import UserDashboard from './pages/User/UserDashboard';
 import UserJobsHistory from './pages/User/UserJobsHistory';
 import UserInfoDashboard from './pages/User/UserInfo';
 import UserRoute from './pages/User/UserRoute';
+import UpdateApplicant from './pages/Admin/jobs/UpdateApplicant';
 
 // Custom HOC
 const AdminDashboardPage = DashboardLayout(AdminDashboard);
@@ -34,6 +35,7 @@ const AdminCreateJobDashboard = DashboardLayout(CreateJob);
 const AdminCreateJobTypeDashboard = DashboardLayout(CreateJobType);
 const AdminEditJobDashboard = DashboardLayout(EditJob);
 const AdminUsersDashboard = DashboardLayout(AdminUsers);
+const AdminUpdateApplicantDashboard = DashboardLayout(UpdateApplicant);
 
 const UserDashboardPage = DashboardLayout(UserDashboard);
 const UserDashboardJobs = DashboardLayout(UserJobsHistory);
@@ -94,6 +96,13 @@ function App() {
                 element={
                   <AdminRoute>
                     <AdminCreateJobTypeDashboard />
+                  </AdminRoute>
+                }
+              />
+              <Route path='/admin/jobs/applicant/:jobId'
+                element={
+                  <AdminRoute>
+                    <AdminUpdateApplicantDashboard />
                   </AdminRoute>
                 }
               />
