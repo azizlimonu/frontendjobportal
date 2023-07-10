@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Container, Stack, Typography } from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Navbar from '../component/Navbar'
 import LoadingBox from '../component/LoadinBox'
 import Footer from '../component/Footer'
@@ -19,27 +19,22 @@ const JobDetails = () => {
 
   // console.log("USERRR", user);
 
-  useEffect(() => {
+  const fetchJobDetails = useCallback(() => {
+    dispatch(jobLoadSingleAction(id));
+  }, [dispatch, id]);
+
+  const fetchUserInfo = useCallback(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (userInfo && userInfo.success) {
       dispatch(userProfileAction());
     }
-    dispatch(jobLoadSingleAction(id));
+  }, [dispatch])
+
+  useEffect(() => {
+    fetchUserInfo();
+    fetchJobDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-  console.log("USER is this", user);
-  if (user) {
-    const jobIdToString = id.toString();
-    const userJobHistory = user?.jobsHistory[0].job._id;
-    console.log("jobidtostring", typeof (jobIdToString));
-    console.log("USERJOBHistory", typeof (userJobHistory))
-    if (jobIdToString === userJobHistory) {
-      console.log("OKAY")
-    } else {
-      console.log("BAD");
-    }
-    //  the output was jobidtostring is a string & the USERJOBHistory was a object
-  }
 
   const handleApplyJob = () => {
     if (!user) {
@@ -66,10 +61,11 @@ const JobDetails = () => {
       jobId: singleJob._id.toString(),
       applicationStatus: 'applied'
     };
-    dispatch(userApplyJobAction(jobData));
+    dispatch(userApplyJobAction(jobData)).then(() => {
+      fetchJobDetails();
+      fetchUserInfo();
+    });
   };
-
-
 
   return (
     <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh" }}>

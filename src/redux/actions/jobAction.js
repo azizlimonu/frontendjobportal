@@ -128,7 +128,7 @@ export const findApplicantAction = (job_id) => async (dispatch) => {
 export const updateApplicantAction = (applicant_data) => async (dispatch) => {
   dispatch({ type: "UPDATE_APPLICANT_REQUEST" });
   try {
-    const { data } = await axios.put(`/api/job/applicant/status`,applicant_data);
+    const { data } = await axios.put(`/api/job/applicant/status`, applicant_data);
     dispatch({
       type: "UPDATE_APPLICANT_SUCCESS",
       payload: data

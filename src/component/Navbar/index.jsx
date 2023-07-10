@@ -37,16 +37,14 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(userLogoutAction())
       .then(() => {
-        window.location.reload(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 500);
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
         toast.error(error.response.data.message);
       });
   };
+
 
   return (
     <AppBar position="static">
